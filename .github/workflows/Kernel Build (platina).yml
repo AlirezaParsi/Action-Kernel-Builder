@@ -8,15 +8,15 @@ on:
         required: false
       KERNEL_TREE:
         description: 'Kernel Tree'
-        default: 'https://github.com/itisFarzin/kernel_xiaomi_sdm660'
+        default: 'https://github.com/AlirezaParsi/PocoF3'
         required: true
       KERNEL_TREE_BRANCH:
         description: 'Kernel Tree Branch'
-        default: 'SW-3.2.7-KSU'
+        default: 'staging'
         required: true
       CODENAME:
         description: 'Phone Codename'
-        default: 'platina'
+        default: 'alioth'
         required: true
       ANYKERNEL_URL:
         description: 'AnyKernel Url (leave blank if you dont want AnyKernel)'
@@ -139,7 +139,7 @@ jobs:
         export KBUILD_BUILD_USER="itisFarzin"
         export KBUILD_BUILD_HOST="Github"
 
-        make O=out clean mrproper CC=clang ${{ github.event.inputs.CODENAME }}_defconfig 
+        make O=out clean mrproper CC=clang vendor/alioth_defconfig 
         make O=out CC=clang -j$(nproc --all)
 
         echo "elapsed_time=$(echo "$(date +%s)"-"${{ steps.workspace.outputs.start_time }}" | bc)" >> $GITHUB_OUTPUT
